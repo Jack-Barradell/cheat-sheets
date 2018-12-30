@@ -1,14 +1,12 @@
 # Target Recon
 
-
+When setting up to target a machine, you need to carry out some recon, to find it on the network and calculate the attack surface 
 
 ## Host Discovery 
 
-
+Before you can attack a target, you need to know where it is on the network. This is called host discovery.
 
 ### Nmap
-
-
 
 #### No Port Scan
 
@@ -47,13 +45,30 @@ Scan a /24 subnet for hosts which respond to ping, indicating they are up
 
 ## Port Discovery
 
-
+Once you know where the host is, you will want to know what's running on it as this is your attack scope, a method of doing this is port discovery
 
 ### Nmap
 
+#### TCP SYN Scan + Version Fingerprinting
+
+Scan a given host or subnet using a SYN scan, attempting to work out what service is running on the port
+
+    nmap -sSV [IP][Subnet]
+
+##### Params
+
+    [IP]: IP address to test, can scan a range by providing a Subnet
+    [Subnet] (optional): Subnet range to scan, commonly /24 or /16
+
+##### Examples
+
+    nmap -sSV 192.168.56.102
+
+    nmap -sSV 192.168.56.0/24
+
 #### TCP SYN Scan (All Ports) + Version Fingerprinting
 
-Scan a given host or subnet using a SYN scan accross all ports, attempting to work out what service is running on the port
+Scan a given host or subnet using a SYN scan across all ports, attempting to work out what service is running on the port
 
     nmap -sSV -p- [IP][Subnet]
 
@@ -67,6 +82,40 @@ Scan a given host or subnet using a SYN scan accross all ports, attempting to wo
     nmap -sSV -p- 192.168.56.102
 
     nmap -sSV -p- 192.168.56.0/24
+
+#### TCP SYN Scan + Version Fingerprinting + Default Scripts
+
+Scan a given host or subnet using a SYN scan, attempting to work out what service is running on the port, running default scripts against the services, these can aid in early automated enumeration such as detecting robots.txt files on web servers
+
+    nmap -sSVC [IP][Subnet]
+
+##### Params
+
+    [IP]: IP address to test, can scan a range by providing a Subnet
+    [Subnet] (optional): Subnet range to scan, commonly /24 or /16
+
+##### Examples
+
+    nmap -sSVC 192.168.56.102
+
+    nmap -sSVC 192.168.56.0/24
+
+#### UDP Scan + Version Fingerprinting
+
+Scan a given host or subnet using UDP, attempting to work out what service is running on the port
+
+    nmap -sUV [IP][Subnet]
+
+##### Params
+
+    [IP]: IP address to test, can scan a range by providing a Subnet
+    [Subnet] (optional): Subnet range to scan, commonly /24 or /16
+
+##### Examples
+
+    nmap -sUV 192.168.56.102
+
+    nmap -sUV 192.168.56.0/24
 
 ### Bash
 
