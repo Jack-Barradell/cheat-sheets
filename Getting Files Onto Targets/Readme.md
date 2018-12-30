@@ -2,10 +2,10 @@
 
 
 
-# Using wget
+## Using wget
 
 
 
-# Using Netcat
+## Using Netcat
 
 
